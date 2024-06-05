@@ -1,0 +1,86 @@
+﻿<Page x:Class="BookLove.Views.Pages.BookPage.BookActionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookLove.Views.Pages.BookPage"
+      mc:Ignorable="d" FontFamily="Century Gothic"
+      FontSize="16"
+      d:DesignHeight="700" d:DesignWidth="1280"
+      Title="Добавление / Редактирование">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Border BorderThickness="2">
+                    <Image Width="250"
+                           Height="250"
+                           Name="BookPicture"
+                           Source="{Binding Book.GetPicture}"/>
+                </Border>
+                <Button Style="{StaticResource nowidhtButtonStyle}"
+                        Content="Выбрать"
+                        Margin="0,5,0,0"
+                        Click="SelectedPicture_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" Margin="16,0,-16,0">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="300">
+                <TextBlock Text="Наименование: "/>
+                <TextBox Text="{Binding Book.title}"/>
+                <TextBlock Text="Имя Автора: "/>
+                <TextBox Text="{Binding Author.firstName}"/>
+                <TextBlock Text="Фамилия Автора: "/>
+                <TextBox Text="{Binding Author.lastName}"/>
+                <TextBlock Text="Отчество Автора: "/>
+                <TextBox Text="{Binding Author.secondName}"/>
+                <TextBlock Text="Издатель: "/>
+                <ComboBox SelectedItem="{Binding Book.Publisher}"
+                          ItemsSource="{Binding Publishers}"
+                          DisplayMemberPath="titile"/>
+                <TextBlock Text="Жанр: "/>
+                <ComboBox SelectedItem="{Binding Book.Genre}"
+                          ItemsSource="{Binding Genres}"
+                          DisplayMemberPath="title"/>
+                <TextBlock Text="Количество: "/>
+                <TextBox Text="{Binding Book.count}"/>
+                <TextBlock Text="Цена: "/>
+                <TextBox Text="{Binding Book.price}"
+                         Name="txbTotalPrice"/>
+                <Button Style="{StaticResource nowidhtButtonStyle}"
+                        Margin="0,10,0,0"
+                        Content="Сохранить"
+                        Click="BookSave_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Style="{StaticResource nowidhtButtonStyle}"
+                        Margin="0,5"
+                        Content="Добавить издателя"
+                        Click="ButtonPublisher_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

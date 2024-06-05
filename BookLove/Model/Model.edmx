@@ -1,0 +1,1196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbBookLoveModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="secondName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Basket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="idProvider" Type="int" Nullable="false" />
+          <Property Name="idBook" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+          <Property Name="totalPrice" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="idAuthor" Type="int" Nullable="false" />
+          <Property Name="idGenre" Type="int" Nullable="false" />
+          <Property Name="idPublisher" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="pucture" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idCity" Type="int" Nullable="false" />
+          <Property Name="street" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GuestBasket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sessionId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="idBook" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+          <Property Name="totalPrice" Type="float" Nullable="false" />
+          <Property Name="idOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="roleId" Type="int" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="orderDate" Type="datetime" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="totalPrice" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idOrder" Type="int" Nullable="false" />
+          <Property Name="idBook" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+          <Property Name="unitPrice" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titile" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="contact" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="secondName" Type="nvarchar" MaxLength="50" />
+          <Property Name="numberContract" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateOfRegistration" Type="date" Nullable="false" />
+          <Property Name="idLogin" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supple">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idProvider" Type="int" Nullable="false" />
+          <Property Name="idBook" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="dateSupple" Type="date" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+          <Property Name="totalPrice" Type="float" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Basket_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="idBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basket_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basket_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="idProvider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Author">
+          <End Role="Author" Type="Self.Author" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="idAuthor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Genre">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="idGenre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Publisher">
+          <End Role="Publisher" Type="Self.Publisher" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="idPublisher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuestBasket_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="GuestBasket" Type="Self.GuestBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GuestBasket">
+              <PropertyRef Name="idBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuestBasket_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="GuestBasket" Type="Self.GuestBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GuestBasket">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Registration">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="idBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Login">
+          <End Role="Login" Type="Self.Login" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="idLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supple_Book1">
+          <End Role="Book" Type="Self.Book" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supple" Type="Self.Supple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Supple">
+              <PropertyRef Name="idBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supple_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supple" Type="Self.Supple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Supple">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supple_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="Supple" Type="Self.Supple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Supple">
+              <PropertyRef Name="idProvider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbBookLoveModelStoreContainer">
+          <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Basket" EntityType="Self.Basket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuestBasket" EntityType="Self.GuestBasket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supple" EntityType="Self.Supple" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Basket_Book" Association="Self.FK_Basket_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basket_Client" Association="Self.FK_Basket_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basket_Provider" Association="Self.FK_Basket_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Author" Association="Self.FK_Book_Author">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Genre" Association="Self.FK_Book_Genre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Publisher" Association="Self.FK_Book_Publisher">
+            <End Role="Publisher" EntitySet="Publisher" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_City" Association="Self.FK_Client_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuestBasket_Book" Association="Self.FK_GuestBasket_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="GuestBasket" EntitySet="GuestBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuestBasket_Order" Association="Self.FK_GuestBasket_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="GuestBasket" EntitySet="GuestBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Role" Association="Self.FK_Login_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus" Association="Self.FK_Order_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Registration" Association="Self.FK_Order_Registration">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Book" Association="Self.FK_OrderDetail_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Login" Association="Self.FK_Registration_Login">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supple_Book1" Association="Self.FK_Supple_Book1">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Supple" EntitySet="Supple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supple_Client" Association="Self.FK_Supple_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Supple" EntitySet="Supple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supple_Provider" Association="Self.FK_Supple_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Supple" EntitySet="Supple" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbBookLoveModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbBookLoveEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Author" EntityType="dbBookLoveModel.Author" />
+          <EntitySet Name="Basket" EntityType="dbBookLoveModel.Basket" />
+          <EntitySet Name="Book" EntityType="dbBookLoveModel.Book" />
+          <EntitySet Name="City" EntityType="dbBookLoveModel.City" />
+          <EntitySet Name="Client" EntityType="dbBookLoveModel.Client" />
+          <EntitySet Name="Genre" EntityType="dbBookLoveModel.Genre" />
+          <EntitySet Name="GuestBasket" EntityType="dbBookLoveModel.GuestBasket" />
+          <EntitySet Name="Login" EntityType="dbBookLoveModel.Login" />
+          <EntitySet Name="Order" EntityType="dbBookLoveModel.Order" />
+          <EntitySet Name="OrderDetail" EntityType="dbBookLoveModel.OrderDetail" />
+          <EntitySet Name="OrderStatus" EntityType="dbBookLoveModel.OrderStatus" />
+          <EntitySet Name="Provider" EntityType="dbBookLoveModel.Provider" />
+          <EntitySet Name="Publisher" EntityType="dbBookLoveModel.Publisher" />
+          <EntitySet Name="Registration" EntityType="dbBookLoveModel.Registration" />
+          <EntitySet Name="Role" EntityType="dbBookLoveModel.Role" />
+          <EntitySet Name="Supple" EntityType="dbBookLoveModel.Supple" />
+          <AssociationSet Name="FK_Book_Author" Association="dbBookLoveModel.FK_Book_Author">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basket_Book" Association="dbBookLoveModel.FK_Basket_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basket_Client" Association="dbBookLoveModel.FK_Basket_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basket_Provider" Association="dbBookLoveModel.FK_Basket_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Genre" Association="dbBookLoveModel.FK_Book_Genre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Publisher" Association="dbBookLoveModel.FK_Book_Publisher">
+            <End Role="Publisher" EntitySet="Publisher" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuestBasket_Book" Association="dbBookLoveModel.FK_GuestBasket_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="GuestBasket" EntitySet="GuestBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Book" Association="dbBookLoveModel.FK_OrderDetail_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supple_Book1" Association="dbBookLoveModel.FK_Supple_Book1">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Supple" EntitySet="Supple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_City" Association="dbBookLoveModel.FK_Client_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supple_Client" Association="dbBookLoveModel.FK_Supple_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Supple" EntitySet="Supple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuestBasket_Order" Association="dbBookLoveModel.FK_GuestBasket_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="GuestBasket" EntitySet="GuestBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Role" Association="dbBookLoveModel.FK_Login_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Login" Association="dbBookLoveModel.FK_Registration_Login">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus" Association="dbBookLoveModel.FK_Order_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Registration" Association="dbBookLoveModel.FK_Order_Registration">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supple_Provider" Association="dbBookLoveModel.FK_Supple_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Supple" EntitySet="Supple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="dbBookLoveModel.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Book" Relationship="dbBookLoveModel.FK_Book_Author" FromRole="Author" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Basket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idClient" Type="Int32" Nullable="false" />
+          <Property Name="idProvider" Type="Int32" Nullable="false" />
+          <Property Name="idBook" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <Property Name="totalPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="dbBookLoveModel.FK_Basket_Book" FromRole="Basket" ToRole="Book" />
+          <NavigationProperty Name="Client" Relationship="dbBookLoveModel.FK_Basket_Client" FromRole="Basket" ToRole="Client" />
+          <NavigationProperty Name="Provider" Relationship="dbBookLoveModel.FK_Basket_Provider" FromRole="Basket" ToRole="Provider" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idAuthor" Type="Int32" Nullable="false" />
+          <Property Name="idGenre" Type="Int32" Nullable="false" />
+          <Property Name="idPublisher" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="pucture" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Author" Relationship="dbBookLoveModel.FK_Book_Author" FromRole="Book" ToRole="Author" />
+          <NavigationProperty Name="Basket" Relationship="dbBookLoveModel.FK_Basket_Book" FromRole="Book" ToRole="Basket" />
+          <NavigationProperty Name="Genre" Relationship="dbBookLoveModel.FK_Book_Genre" FromRole="Book" ToRole="Genre" />
+          <NavigationProperty Name="Publisher" Relationship="dbBookLoveModel.FK_Book_Publisher" FromRole="Book" ToRole="Publisher" />
+          <NavigationProperty Name="GuestBasket" Relationship="dbBookLoveModel.FK_GuestBasket_Book" FromRole="Book" ToRole="GuestBasket" />
+          <NavigationProperty Name="OrderDetail" Relationship="dbBookLoveModel.FK_OrderDetail_Book" FromRole="Book" ToRole="OrderDetail" />
+          <NavigationProperty Name="Supple" Relationship="dbBookLoveModel.FK_Supple_Book1" FromRole="Book" ToRole="Supple" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="dbBookLoveModel.FK_Client_City" FromRole="City" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idCity" Type="Int32" Nullable="false" />
+          <Property Name="street" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Basket" Relationship="dbBookLoveModel.FK_Basket_Client" FromRole="Client" ToRole="Basket" />
+          <NavigationProperty Name="City" Relationship="dbBookLoveModel.FK_Client_City" FromRole="Client" ToRole="City" />
+          <NavigationProperty Name="Supple" Relationship="dbBookLoveModel.FK_Supple_Client" FromRole="Client" ToRole="Supple" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Book" Relationship="dbBookLoveModel.FK_Book_Genre" FromRole="Genre" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="GuestBasket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sessionId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="idBook" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <Property Name="totalPrice" Type="Double" Nullable="false" />
+          <Property Name="idOrder" Type="Int32" />
+          <NavigationProperty Name="Book" Relationship="dbBookLoveModel.FK_GuestBasket_Book" FromRole="GuestBasket" ToRole="Book" />
+          <NavigationProperty Name="Order" Relationship="dbBookLoveModel.FK_GuestBasket_Order" FromRole="GuestBasket" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleId" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="dbBookLoveModel.FK_Login_Role" FromRole="Login" ToRole="Role" />
+          <NavigationProperty Name="Registration" Relationship="dbBookLoveModel.FK_Registration_Login" FromRole="Login" ToRole="Registration" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="totalPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="GuestBasket" Relationship="dbBookLoveModel.FK_GuestBasket_Order" FromRole="Order" ToRole="GuestBasket" />
+          <NavigationProperty Name="OrderStatus" Relationship="dbBookLoveModel.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatus" />
+          <NavigationProperty Name="Registration" Relationship="dbBookLoveModel.FK_Order_Registration" FromRole="Order" ToRole="Registration" />
+          <NavigationProperty Name="OrderDetail" Relationship="dbBookLoveModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idOrder" Type="Int32" Nullable="false" />
+          <Property Name="idBook" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <Property Name="unitPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="dbBookLoveModel.FK_OrderDetail_Book" FromRole="OrderDetail" ToRole="Book" />
+          <NavigationProperty Name="Order" Relationship="dbBookLoveModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="dbBookLoveModel.FK_Order_OrderStatus" FromRole="OrderStatus" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Basket" Relationship="dbBookLoveModel.FK_Basket_Provider" FromRole="Provider" ToRole="Basket" />
+          <NavigationProperty Name="Supple" Relationship="dbBookLoveModel.FK_Supple_Provider" FromRole="Provider" ToRole="Supple" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Book" Relationship="dbBookLoveModel.FK_Book_Publisher" FromRole="Publisher" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="numberContract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dateOfRegistration" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idLogin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Login" Relationship="dbBookLoveModel.FK_Registration_Login" FromRole="Registration" ToRole="Login" />
+          <NavigationProperty Name="Order" Relationship="dbBookLoveModel.FK_Order_Registration" FromRole="Registration" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Login" Relationship="dbBookLoveModel.FK_Login_Role" FromRole="Role" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Supple">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProvider" Type="Int32" Nullable="false" />
+          <Property Name="idBook" Type="Int32" Nullable="false" />
+          <Property Name="idClient" Type="Int32" Nullable="false" />
+          <Property Name="dateSupple" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="totalPrice" Type="Double" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="dbBookLoveModel.FK_Supple_Book1" FromRole="Supple" ToRole="Book" />
+          <NavigationProperty Name="Client" Relationship="dbBookLoveModel.FK_Supple_Client" FromRole="Supple" ToRole="Client" />
+          <NavigationProperty Name="Provider" Relationship="dbBookLoveModel.FK_Supple_Provider" FromRole="Supple" ToRole="Provider" />
+        </EntityType>
+        <Association Name="FK_Book_Author">
+          <End Type="dbBookLoveModel.Author" Role="Author" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbBookLoveModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="idAuthor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basket_Book">
+          <End Type="dbBookLoveModel.Book" Role="Book" Multiplicity="1" />
+          <End Type="dbBookLoveModel.Basket" Role="Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="idBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basket_Client">
+          <End Type="dbBookLoveModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="dbBookLoveModel.Basket" Role="Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basket_Provider">
+          <End Type="dbBookLoveModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="dbBookLoveModel.Basket" Role="Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="idProvider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Genre">
+          <End Type="dbBookLoveModel.Genre" Role="Genre" Multiplicity="1" />
+          <End Type="dbBookLoveModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="idGenre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Publisher">
+          <End Type="dbBookLoveModel.Publisher" Role="Publisher" Multiplicity="1" />
+          <End Type="dbBookLoveModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="idPublisher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuestBasket_Book">
+          <End Type="dbBookLoveModel.Book" Role="Book" Multiplicity="1" />
+          <End Type="dbBookLoveModel.GuestBasket" Role="GuestBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GuestBasket">
+              <PropertyRef Name="idBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Book">
+          <End Type="dbBookLoveModel.Book" Role="Book" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbBookLoveModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="idBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supple_Book1">
+          <End Type="dbBookLoveModel.Book" Role="Book" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbBookLoveModel.Supple" Role="Supple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Supple">
+              <PropertyRef Name="idBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_City">
+          <End Type="dbBookLoveModel.City" Role="City" Multiplicity="1" />
+          <End Type="dbBookLoveModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supple_Client">
+          <End Type="dbBookLoveModel.Client" Role="Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbBookLoveModel.Supple" Role="Supple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Supple">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuestBasket_Order">
+          <End Type="dbBookLoveModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="dbBookLoveModel.GuestBasket" Role="GuestBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GuestBasket">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Role">
+          <End Type="dbBookLoveModel.Role" Role="Role" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbBookLoveModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Login">
+          <End Type="dbBookLoveModel.Login" Role="Login" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbBookLoveModel.Registration" Role="Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="idLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderStatus">
+          <End Type="dbBookLoveModel.OrderStatus" Role="OrderStatus" Multiplicity="1" />
+          <End Type="dbBookLoveModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Registration">
+          <End Type="dbBookLoveModel.Registration" Role="Registration" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbBookLoveModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supple_Provider">
+          <End Type="dbBookLoveModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="dbBookLoveModel.Supple" Role="Supple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Supple">
+              <PropertyRef Name="idProvider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Order">
+          <End Type="dbBookLoveModel.Order" Role="Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbBookLoveModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbBookLoveModelStoreContainer" CdmEntityContainer="dbBookLoveEntities">
+          <EntitySetMapping Name="Author">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Author">
+              <MappingFragment StoreEntitySet="Author">
+                <ScalarProperty Name="secondName" ColumnName="secondName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Basket">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Basket">
+              <MappingFragment StoreEntitySet="Basket">
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="idBook" ColumnName="idBook" />
+                <ScalarProperty Name="idProvider" ColumnName="idProvider" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Book">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="pucture" ColumnName="pucture" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="idPublisher" ColumnName="idPublisher" />
+                <ScalarProperty Name="idGenre" ColumnName="idGenre" />
+                <ScalarProperty Name="idAuthor" ColumnName="idAuthor" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="dbBookLoveModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="idCity" ColumnName="idCity" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genre">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuestBasket">
+            <EntityTypeMapping TypeName="dbBookLoveModel.GuestBasket">
+              <MappingFragment StoreEntitySet="GuestBasket">
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="idBook" ColumnName="idBook" />
+                <ScalarProperty Name="sessionId" ColumnName="sessionId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetail">
+            <EntityTypeMapping TypeName="dbBookLoveModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="idBook" ColumnName="idBook" />
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="dbBookLoveModel.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provider">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Provider">
+              <MappingFragment StoreEntitySet="Provider">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publisher">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Publisher">
+              <MappingFragment StoreEntitySet="Publisher">
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="titile" ColumnName="titile" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registration">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="idLogin" ColumnName="idLogin" />
+                <ScalarProperty Name="dateOfRegistration" ColumnName="dateOfRegistration" />
+                <ScalarProperty Name="numberContract" ColumnName="numberContract" />
+                <ScalarProperty Name="secondName" ColumnName="secondName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supple">
+            <EntityTypeMapping TypeName="dbBookLoveModel.Supple">
+              <MappingFragment StoreEntitySet="Supple">
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="dateSupple" ColumnName="dateSupple" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="idBook" ColumnName="idBook" />
+                <ScalarProperty Name="idProvider" ColumnName="idProvider" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,75 @@
+﻿<Page x:Class="BookLove.Views.Pages.SystemPage.MenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookLove.Views.Pages.SystemPage"
+      mc:Ignorable="d" FontFamily="Century Gothic"
+      d:DesignHeight="700" d:DesignWidth="1280"
+      Title="Меню">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Button Style="{StaticResource functionButtonStyle}"
+                    Content="Книги"
+                    Click="BookActionPage_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Style="{StaticResource functionButtonStyle}"
+                    Content="Сформировать заказ"
+                    Margin="0,10"
+                    Click="CreateOrderPage_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{StaticResource functionButtonStyle}"
+                    Content="Заказы"
+                    Margin="0,0,0,10"
+                    Click="OrderView_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{StaticResource functionButtonStyle}"
+                    Content="История"
+                    Click="HistoryPage_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Style="{StaticResource functionButtonStyle}"
+                    Content="Поставщики"
+                    Margin="0,10,0,0"
+                    Click="ProviderButton_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Style="{StaticResource functionButtonStyle}"
+                    Content="Выйти"
+                    Margin="0,10">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

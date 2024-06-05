@@ -1,0 +1,80 @@
+﻿<Page x:Class="BookLove.Views.Pages.ProviderPage.ProviderViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookLove.Views.Pages.ProviderPage"
+      mc:Ignorable="d" FontSize="16" FontFamily="Century Gothic"
+      d:DesignHeight="700" d:DesignWidth="1280"
+      Loaded="Page_Loaded"
+      Title="Поставщики">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Поиск:"/>
+                <TextBox Name="txbSearch"
+                         Width="250"
+                         TextChanged="txbSearch_TextChanged"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ListView Name="ProviderList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel>
+                                <Label Content="{Binding id}" ContentStringFormat="id: {0}"/>
+                                <Label Content="{Binding title}" ContentStringFormat="Наименование: {0}"/>
+                                <Label Content="{Binding city}" ContentStringFormat="Город :{0}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                <Button Style="{StaticResource functionButtonStyle}"
+                        Content="Добавить"
+                        Click="ButtonAddProvider_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Style="{StaticResource functionButtonStyle}"
+                        Margin="10,0"
+                        Content="Редактировать"
+                        Click="ButtonEdit_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Style="{StaticResource functionButtonStyle}"
+                        Content="Удалить"
+                        Click="RemoveProvider_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

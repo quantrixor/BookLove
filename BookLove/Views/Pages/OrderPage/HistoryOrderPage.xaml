@@ -1,0 +1,81 @@
+﻿<Page x:Class="BookLove.Views.Pages.OrderPage.HistoryOrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookLove.Views.Pages.OrderPage"
+      mc:Ignorable="d" FontFamily="Century Gothic"
+      FontSize="18"
+      d:DesignHeight="700" d:DesignWidth="1280"
+      Title="HistoryOrderPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+
+                <TextBlock Text="Выберите дату заказа: "/>
+                <DatePicker Width="200"
+                                Name="dtpDateHistory"
+                                SelectedDateChanged="dtpDateHistory_SelectedDateChanged"/>
+
+                <Button Style="{StaticResource historyPageButtonStyle}"
+                        Content="Сбросить"
+                        Margin="10,0,10,0"
+                        Click="btnFilterOff_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <TextBlock Text="Вывести: "/>
+                <Button Style="{StaticResource historyPageButtonStyle}"
+                        Content="PDF"
+                        Click="btnPDFExport_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Style="{StaticResource historyPageButtonStyle}"
+                        Content="CSV"
+                        Margin="10,0,10,0"
+                        Click="btnCSV_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ListView Name="HistoryOrderList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel>
+                                <Label Content="{Binding Client.GetFullTitle}" ContentStringFormat="Данные Клиента: {0}"/>
+                                <Label Content="{Binding Book.GetFullTitle}" ContentStringFormat="Книга: {0}"/>
+                                <Label Content="{Binding Provider.title}" ContentStringFormat="Поставщик: {0}"/>
+                                <Label Content="{Binding count}" ContentStringFormat="Количество: {0} шт."/>
+                                <Label Content="{Binding dateSupple}" ContentStringFormat="Дата покупки: {0}"/>
+                                <Label Content="{Binding totalPrice}" ContentStringFormat="Итоговая цена: {0} руб."/>
+                                <Label Content="{Binding description}" ContentStringFormat="Описание: {0}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

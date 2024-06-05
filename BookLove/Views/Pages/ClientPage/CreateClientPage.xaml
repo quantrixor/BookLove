@@ -1,0 +1,46 @@
+﻿<Page x:Class="BookLove.Views.Pages.ClientPage.CreateClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookLove.Views.Pages.ClientPage"
+      mc:Ignorable="d"  FontSize="16" FontFamily="Century Gothic"
+      d:DesignHeight="700" d:DesignWidth="1280"
+      Title="Добавить клиента">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="300">
+            <TextBlock Text="Наименование: "/>
+            <TextBox Text="{Binding Client.title}"/>
+            <TextBlock Text="Город: "/>
+            <ComboBox SelectedItem="{Binding Client.City}"
+                      DisplayMemberPath="title"
+                      ItemsSource="{Binding Cities}"/>
+            <TextBlock Text="Адрес: "/>
+            <TextBox Text="{Binding Client.street}" Height="80"
+                     TextWrapping="Wrap"/>
+            <Button Style="{StaticResource nowidhtButtonStyle}"
+                    Margin="0,10,0,0"
+                    Content="Создать"
+                    Click="SaveClient_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Style="{StaticResource nowidhtButtonStyle}"
+                    Content="Клиент существует"
+                    Margin="0,10,0,0"
+                    Click="CreateSkipClient_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
